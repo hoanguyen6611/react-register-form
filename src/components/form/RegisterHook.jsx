@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import InputHook from "../input/InputHook";
 import RadioHook from "../radio/RadioHook";
 import CheckboxHook from "../checkbox/CheckboxHook";
-import DropdownHook from "../dropdown/DropdownHook"
+import DropdownHook from "../dropdown/DropdownHook";
 
 const RegisterHook = () => {
   const {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm();
   const onSubmitHandler = (values) => {
     console.log(values);
@@ -71,7 +72,7 @@ const RegisterHook = () => {
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <label className="cursor-pointer">Are you</label>
-        <DropdownHook  control={control}/>
+        <DropdownHook control={control} setValue={setValue} name="job" />
       </div>
       <div>
         <CheckboxHook

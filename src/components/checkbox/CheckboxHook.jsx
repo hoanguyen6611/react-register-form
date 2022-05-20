@@ -14,6 +14,7 @@ const CheckboxHook = ({ control, text, ...props }) => {
         {...props}
         className="hidden"
         id={props.name}
+        checked={field.value}
       />
       <div className="flex items-center gap-x-3">
         <div className="bg-white transition-all w-full h-full rounded-md flex items-center justify-center custom-checkbox-square">

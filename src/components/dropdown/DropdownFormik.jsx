@@ -1,22 +1,26 @@
 import React from "react";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { useWatch } from "react-hook-form";
+import { useField } from "formik";
 
 const DropdownFormik = ({
   labelText,
   name,
   data,
   dropdownLabel = "Select your job",
+  setValue,
 }) => {
   const { show, setShow, nodeRef } = useClickOutSide();
   const [label, setLabel] = React.useState(dropdownLabel);
   const handleClickDropdown = (e) => {
+    setValue(name, e.target.dataset.value);
     setShow(false);
     setLabel(e.target.textContent);
   };
-  // React.useEffect(() => {
-  //   if (dropdownValue === "") setLabel(dropdownLabel);
-  // }, [dropdownValue]);
+  const [field, meta ] = useField({name});
+  React.useEffect(() => {
+    if (field.value === "") setLabel(dropdownLabel);
+  }, [field.value]);
   return (
     <div className="flex flex-col gap-3 mb-5">
       <label className="cursor-pointer">{labelText}</label>
@@ -46,6 +50,9 @@ const DropdownFormik = ({
             ))}
         </div>
       </div>
+      {meta.touched && meta.error && (
+        <p className="text-red-500 text-sm">{meta.error}</p>
+      )}
     </div>
   );
 };
